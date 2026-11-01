@@ -1,0 +1,16 @@
+{
+  "name": "arabic-traders-academy",
+  "version": "1.0.0",
+  "description": "أكاديمية المتداولين العربية - منصة مالية عربية (بلا اعتماديات خارجية)",
+  "type": "commonjs",
+  "main": "server/index.js",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning server/index.js",
+    "dev": "node --disable-warning=ExperimentalWarning --watch server/index.js",
+    "create-admin": "node --disable-warning=ExperimentalWarning scripts/create-admin.js",
+    "test": "node --disable-warning=ExperimentalWarning tests/integration.test.js"
+  },
+  "license": "UNLICENSED",
+  "private": true
+}

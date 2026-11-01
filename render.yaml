@@ -1,0 +1,26 @@
+# Render Blueprint: خدمة ويب Node مع قرص دائم (ضروري لقاعدة SQLite والصور المرفوعة).
+# القرص الدائم يتطلب خطة مدفوعة. بدون قرص دائم ستضيع البيانات عند كل نشر.
+services:
+  - type: web
+    name: arabic-traders-academy
+    runtime: node
+    plan: starter
+    buildCommand: "echo no build step"
+    startCommand: "node --disable-warning=ExperimentalWarning server/index.js"
+    healthCheckPath: /api/system/status
+    disk:
+      name: ata-data
+      mountPath: /var/data
+      sizeGB: 5
+    envVars:
+      - { key: NODE_ENV, value: production }
+      - { key: TRUST_PROXY, value: "1" }
+      - { key: DATA_DIR, value: /var/data }
+      - { key: UPLOAD_DIR, value: /var/data/uploads }
+      - { key: NODE_VERSION, value: "22" }
+      - { key: PUBLIC_URL, sync: false }
+      - { key: ADMIN_EMAIL, sync: false }
+      - { key: ADMIN_PASSWORD, sync: false }
+      - { key: ANTHROPIC_API_KEY, sync: false }
+      - { key: TWELVEDATA_API_KEY, sync: false }
+      - { key: FMP_API_KEY, sync: false }

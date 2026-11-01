@@ -1,0 +1,29 @@
+# بديل أرخص: Fly.io مع Volume دائم. الخطوات في README. غيّر app واسم المنطقة قبل الاستخدام.
+app = "arabic-traders-academy"
+primary_region = "fra"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  NODE_ENV = "production"
+  PORT = "3000"
+  DATA_DIR = "/data"
+  UPLOAD_DIR = "/data/uploads"
+  TRUST_PROXY = "1"
+
+[mounts]
+  source = "ata_data"
+  destination = "/data"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = "off"
+  auto_start_machines = true
+  min_machines_running = 1
+  [[http_service.checks]]
+    path = "/api/system/status"
+    interval = "30s"
+    timeout = "5s"
+    grace_period = "15s"
